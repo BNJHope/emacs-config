@@ -8,7 +8,7 @@
  '(custom-enabled-themes (quote (deeper-blue)))
  '(package-selected-packages
    (quote
-    (magit neotree ac-js2 auto-complete flycheck rjsx-mode docker counsel-projectile projectile linum-relative evil ivy))))
+    (cider clojure-mode magit neotree ac-js2 auto-complete flycheck rjsx-mode docker counsel-projectile projectile linum-relative evil ivy))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -22,17 +22,27 @@
 (package-initialize)
 
 ;; Set of modules to require
-(require 'evil)
 (require 'linum-relative)
+
+;; Evil
+(use-package evil
+  :ensure t
+  :init (evil-mode 1))
+
+;; Magit
+(use-package magit 
+  :ensure t)
+
+(use-package linum-relative
+  :ensure t)
 
 ;; Emacs autocomplete mode to use
 (ivy-mode 1)
 
-;; Key binding mode to use
-(evil-mode 1)
-
 ;; Projectile mode to navigate projects
 (projectile-mode)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 ;; Autocomplete
 (ac-config-default)
@@ -42,7 +52,7 @@
 (add-hook 'prog-mode-hook (lambda ()
 			    (linum-mode 1)
 			    (linum-relative-on)
-			    ))
+			    (electric-pair-mode)))
 
 ;; Magit
 (global-set-key (kbd "C-x g") 'magit-status)
@@ -75,3 +85,11 @@
 (setenv "DOCKER_HOST" "tcp://10.11.12.13:2376")
 (setenv "DOCKER_CERT_PATH" "/Users/benhope/.docker/machine/machines/box")
 (setenv "DOCKER_MACHINE_NAME" "box")
+
+;; GUI bar modes
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+
+(provide 'init)
+;;; init.el ends here
