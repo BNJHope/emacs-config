@@ -8,7 +8,7 @@
  '(custom-enabled-themes (quote (deeper-blue)))
  '(package-selected-packages
    (quote
-    (all-the-icons 0xc cider clojure-mode magit neotree ac-js2 auto-complete flycheck rjsx-mode docker counsel-projectile projectile linum-relative evil ivy))))
+    (intero all-the-icons 0xc cider clojure-mode magit neotree ac-js2 auto-complete flycheck rjsx-mode docker counsel-projectile projectile linum-relative evil ivy))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -32,11 +32,12 @@
   :init (evil-mode 1))
 
 ;; Magit
-(use-package magit 
+(use-package magit
   :ensure t)
 
 (use-package linum-relative
-  :ensure t)
+  :ensure t
+  :init (setq linum-relative-current-symbol ""))
 
 ;; Emacs autocomplete mode to use
 (ivy-mode 1)
@@ -55,6 +56,9 @@
 			    (linum-mode 1)
 			    (linum-relative-on)
 			    (electric-pair-mode)))
+
+(add-hook 'haskell-mode-hook (lambda ()
+			  (intero-global-mode)))
 
 ;; Magit
 (global-set-key (kbd "C-x g") 'magit-status)
