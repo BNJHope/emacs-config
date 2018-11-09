@@ -60,6 +60,9 @@
 (add-hook 'haskell-mode-hook (lambda ()
 			  (intero-global-mode)))
 
+(add-hook 'eshell-mode-hook (lambda ()
+			      (define-key eshell-mode-map (kbd "TAB") 'completion-at-point)))
+
 ;; Magit
 (global-set-key (kbd "C-x g") 'magit-status)
 
