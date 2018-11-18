@@ -8,7 +8,7 @@
  '(custom-enabled-themes (quote (deeper-blue)))
  '(package-selected-packages
    (quote
-    (intero all-the-icons 0xc cider clojure-mode magit neotree ac-js2 auto-complete flycheck rjsx-mode docker counsel-projectile projectile linum-relative evil ivy))))
+    (markdown-mode auctex-latexmk auctex intero all-the-icons 0xc cider clojure-mode magit neotree ac-js2 auto-complete flycheck rjsx-mode docker counsel-projectile projectile linum-relative evil ivy))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -38,6 +38,18 @@
 (use-package linum-relative
   :ensure t
   :init (setq linum-relative-current-symbol ""))
+
+(use-package auctex-latexmk
+  :ensure t
+  :init (auctex-latexmk-setup))
+
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "markdown"))
 
 ;; Emacs autocomplete mode to use
 (ivy-mode 1)
