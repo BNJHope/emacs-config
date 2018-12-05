@@ -44,6 +44,10 @@
   :ensure t
   :init (global-flycheck-mode))
 
+(use-package which-key
+  :ensure t
+  :init (which-key-mode))
+
 (use-package neotree
     :ensure t
     :config
